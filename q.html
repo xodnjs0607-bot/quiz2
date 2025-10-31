@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>나에게 맞는 수원 문화재 여행은?</title>
+  <style>
+    body {
+  font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+  background: linear-gradient(180deg, #faf7f2, #e7e0d8);
+  
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  padding-top: 50px;  
+  min-height: 100vh;       
+  margin: 0;
+  overflow-y: auto;      
+}
+
+    #quiz-box {
+  padding: 40px 35px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+ max-height: 90vh; 
+  
+}
+
+   h1 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #333;
+  line-height: 1.5;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+    button {
+  display: block;
+  width: 100%;
+  margin: 15px 0;
+  padding: 18px 20px;
+  border: 2px solid #ddd;
+  border-radius: 14px;
+  background: #fff;
+  color: #333;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+ margin: 15px auto; /* 자동 여백으로 수평 가운데 정렬 */
+  text-align: center;
+}
+   button:hover {
+  border-color: #7a5533;
+  background: #fdf9f5;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+}
+button:active {
+  transform: scale(0.98);
+  background: #f2ece5;
+}
+    .result {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #222;
+      margin-top: 20px;
+    }
+    img.result-img {
+      width: 130%;
+      max-width: 500px;
+      border-radius: 15px;
+      margin-top: 20px;
+    }
+    p {
+      text-align: left;
+      margin-top: 15px;
+      line-height: 1.5;
+      color: #555;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="quiz-box">
+    <h1>나에게 맞는 수원 문화재 여행은?</h1>
+
+    <button onclick="startQuiz()">시작하기</button>
+  </div>
+
+  <script>
+    const quizBox = document.getElementById("quiz-box");
+
+   const questions = [ 
+
+ { question: "주말에 하고싶은 것은?", 
+options: [
+ { text: "🧘 지인들과 취미 활동", type: "권선구" }, 
+{ text: "🛍 쇼핑몰에서 유행 즐기기", type: "영통구" }, 
+{ text: "🍜 전통시장 맛집 탐방", type: "팔달구" } ] }, 
+
+{ question: "약속 장소를 정한다면?", 
+options: [ 
+{ text: "🏙 역 근처 대형 복합시설", type: "영통구" }, 
+{ text: "🏮 전통 찻집·한옥 식당", type: "팔달구" }, 
+{ text: "🍺 개조된 창고형 카페", type: "장안구" } ] }, 
+
+{ question: "스트레스를 해소한다면? ", 
+options: [ 
+{ text: "🍃 사람 없는 공원 산책하며 멍 때리기", type: "장안구" }, 
+{ text: "🧠 조용한 공간에서 생각 정리하기", type: "팔달구" }, 
+{ text: "☕ 감성 카페 거리에서 여유롭게 힐링하기", type: "권선구" } ] }, 
+
+{ question: "새로운 식당을 간다면? ", 
+options: [ 
+{ text: "🧼 깨끗하고 정돈된 곳", type: "영통구" }, 
+{ text: "🍲 오래된 맛집", type: "팔달구" }, 
+{ text: "🌿 자연과 어우러진 곳", type: "권선구" } ] }, 
+
+{ question: "가장 중요한 삶의 가치는? ", 
+options: [ 
+{ text: "🚀 혁신과 발전", type: "영통구" }, 
+{ text: "🤝 주변 사람들과의 화합", type: "권선구" }, 
+{ text: "🔥 새로운 도전과 변화", type: "장안구" } ] }, 
+
+{ question: "날씨가 좋아 산책을 할 때, 당신은? ", 
+options: [ 
+{ text: "🏘 골목길 산책하기", type: "장안구" }, 
+{ text: "🏙 광장과 번화가 걷기", type: "팔달구" }, 
+{ text: "🌲 공원·호수 산책하기", type: "권선구" } ] }, 
+
+
+{ question: "사진을 찍게된다면? ", 
+options: [ 
+{ text: "🏯 전통 건축물 배경", type: "팔달구" }, 
+{ text: "🌄 자연과 조화된 풍경", type: "권선구" }, 
+{ text: "💡 독특한 각도·조명 실험", type: "장안구" } ] }, 
+
+{ question: "새로운 경험에 도전할 때, 당신의 선택은? ", 
+options: [ 
+{ text: "🏛 역사 유적 탐방하기", type: "장안구" }, 
+{ text: "☕ 번화가 맛집·카페 즐기기", type: "팔달구" }, 
+{ text: "🌳 자연·공원 체험하기", type: "권선구" } ] }, 
+
+{ question: "길을 걸을 때 당신은?", 
+options: [ 
+{ text: "🏚 오래된 건물과 디테일 관찰하기", type: "장안구" }, 
+{ text: "😄 사람 구경하며 활기 즐기기", type: "팔달구" }, 
+{ text: "🎧 이어폰 끼고 혼자 사색하기", type: "권선구" }, { text: "🧭 새로운 공간 찾아다니기", type: "영통구" } ] } ];
+
+    let current = 0;
+    const score = { "영통구":0, "권선구":0, "팔달구":0, "장안구":0 };
+
+    function startQuiz(){
+      current = 0;
+      for(let key in score) score[key] = 0;
+      renderQuestion();
+    }
+
+    function renderQuestion(){
+      if(current >= questions.length){
+        showResult();
+        return;
+      }
+      const q = questions[current];
+      quizBox.innerHTML = `
+        <h1>${q.question}</h1>
+        ${q.options.map(o => `<button onclick="selectOption('${o.type}')">${o.text}</button>`).join('')}
+      `;
+    }
+
+    function selectOption(type){
+      score[type]++;
+      current++;
+      renderQuestion();
+    }
+
+    function showResult(){
+      const top = Object.keys(score).reduce((a,b) => score[a] > score[b] ? a : b);
+      
+      const images = {
+        "팔달구": "https://as2.ftcdn.net/v2/jpg/03/18/50/91/1000_F_318509134_YElOm3QDhQs7Kf5aKHFCXIiGO1wlokRD.jpg",
+        "영통구": "https://tse1.mm.bing.net/th/id/OIP.q5_TGAQqu5Z0VccLn7QFgQHaFj?rs=1&pid=ImgDetMain&o=7&rm=3",
+        "권선구": "https://blog.kakaocdn.net/dn/cbLqyA/btrATdXnOSk/4abIvUQyOci7zzK2BTp3z0/img.jpg",
+        "장안구": "https://mblogthumb-phinf.pstatic.net/MjAyMDA4MjRfMTgz/MDAxNTk4MjY4MzkxMzQ3.W3Ocx5444f1urxMjIZ2eZcjp7Lv4msMgrUJHMXGoqCAg.4TXZxz3B_zBUlmyNHJPA-b7z3s_SFh9tftMCz17fDvkg.JPEG.tnwlsdl702/0I0A2852.jpg?type=w800"
+      };
+
+      const descs = {
+        "팔달구": `🏯 화성 계승자 유형 — 역사적 가치와 전통을 중시하는 고전적 탐미가<br>
+<span style="color:#000000; font-weight:bold;">추천 활동:</span> 수원 화성행궁 앞에서 전통 의상(한복)을 빌려 입고 친구들과 함께 사진을 찍으며 시간 여행을 즐기기. 저녁에는 방화수류정 주변에서 야경 투어를 하며 전통과 현대가 어우러진 수원의 아름다움을 만끽하기.
+<br>
+<span style="color:#000000; font-weight:bold;">주의할점:</span> 지정된 관람 동선을 지키고, 화성행궁이나 방화수류정 주변의 성곽에 올라가거나 기대지 않도록 주의합니다. 눈으로만 감상하는 자세가 진정한 계승자의 태도입니다.`,
+
+        "영통구": `💡 미래 개척자 유형 — 효율성, 혁신, 실용성을 추구하는 미래지향적 혁신가<br>
+<span style="color:#000000; font-weight:bold;">추천 활동:</span> 수원박물관의 다산 정약용 관련 전시를 관람한 후, 광교 신도시로 이동하여 최신 트렌드의 키덜트/IT 전시를 관람하며 미래 기술과 전통 지식을 연결하기.<br>
+<span style="color:#000000; font-weight:bold;">주의할점:</span> 문화재 관람 시, 플래시를 사용하거나 지정된 구역 외에서 사진을 찍는 행동은 자료의 보존과 관람 질서를 해칠 수 있으니, 효율적인 관람 시스템(안내 표지판)을 철저히 준수해야 합니다.`,
+
+        "권선구": `🌿 정적인 공동체 유형 — 공동체 의식과 조화를 중시하는 온화한 중재자<br>
+<span style="color:#000000; font-weight:bold;">추천 활동:</span> 항미정(서호) 주변의 넓은 뚝방길을 따라 조용히 산책하며 피크닉을 즐기고, 버드내 산제당이나 고색동 도당 주변의 마을을 찾아가 지역 주민들이 주도하는 소규모 향토 행사에 참여하여 따뜻한 공동체 문화를 체험하기. <br>
+<span style="color:#000000; font-weight:bold;">주의할점:</span> 항미정(서호) 주변에서 피크닉을 즐긴 후에는 반드시 모든 쓰레기를 되가져와 자연 경관을 깨끗하게 유지해야 합니다. 또한, 도당과 같은 종교 시설에서는 경건함을 유지하고 소음을 내지 않도록 주의합니다.`,
+
+        "장안구": `🎨 재생 활동가 유형 — 재생과 새로운 가치 창출에 관심 있는 실용적 크리에이터<br>
+<span style="color:#000000; font-weight:bold;">추천 활동:</span> 노송지대에서 수백 년 된 소나무 사이를 걸으며 숲속 산책을 즐기고, 나무들의 역사를 배경으로 가장 고즈넉한 '힐링 인증샷' 남기기. 이후 근처 미륵당이나 수원 광주이씨 월곡댁 등 전통 건축물 앞에서 독특한 배경 사진을 찍으며 시간 여행을 가볍게 경험하기.<br>
+<span style="color:#000000; font-weight:bold;">주의할점:</span> 노송지대의 나무나 지지대비 같은 비석에 기대거나 만지는 행위는 삼가야 합니다. 사진 촬영 시에도 월곡댁처럼 오래된 건축물 내부나 구조를 훼손하지 않도록 주의하고, 항상 '보존이 활용보다 우선'임을 기억해야 합니다.`
+      };
+
+      quizBox.innerHTML = `
+        <h1>당신의 문화유형은 <span class="result">${top}</span> 입니다!</h1>
+        <img src="${images[top]}" class="result-img" alt="${top} 이미지">
+        <p>${descs[top]}</p>
+        <button onclick="startQuiz()">다시하기</button>
+      `;
+    }
+  </script>
+</body>
+</html>
